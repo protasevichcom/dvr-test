@@ -1,0 +1,29 @@
+.room-backdrop {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg-canvas);
+}
+
+.room-backdrop__layer {
+  width: 100%;
+  height: 100%;
+  /* Overscan hides the blurred edges and leaves room for the parallax shift. */
+  transform:
+    translate3d(
+      calc(var(--parallax-x, 0) * var(--scene-parallax-backdrop) * -1),
+      calc(var(--parallax-y, 0) * var(--scene-parallax-backdrop) * -1),
+      0
+    )
+    scale(var(--scene-backdrop-overscan));
+  will-change: transform;
+}
+
+/* The blur stays on the image, inside the moving layer: it is painted once, not on every shift. */
+.room-backdrop__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: var(--scene-backdrop-opacity);
+  filter: blur(var(--scene-backdrop-blur));
+}

@@ -1,0 +1,297 @@
+/*
+ * Semantic tokens: the only tokens components may use.
+ * Desktop values live on :root; headset comfort values override them under [data-mode='vr'].
+ * Rationale: wiki/synthesis/vr-design-principles.md
+ */
+:root {
+  color-scheme: dark;
+
+  /*
+   * Fluid root size: every rem in the UI scales with the viewport. 16 px at 1440×900; follows the
+   * smaller of width and height (16:9 reference), clamped to stay legible and not oversized.
+   */
+  --root-font-size: clamp(12px, min(1.1111vw, 1.7778vh), 24px);
+
+  /* Color — surfaces */
+  --bg-canvas: var(--color-gray-1000);
+  /* Panels are solid graphite (player reference): no borders, rounded to pills and circles. */
+  --surface-glass: rgb(var(--rgb-gray-850) / 0.94);
+  --surface-glass-strong: var(--color-gray-850);
+  --surface-control: var(--color-gray-950);
+  --surface-chip: var(--color-gray-800);
+  --surface-hover: rgb(var(--rgb-white) / 0.08);
+  --surface-pressed: rgb(var(--rgb-white) / 0.14);
+  --surface-selected: var(--color-gray-750);
+  --surface-media: var(--color-gray-900);
+  --surface-badge: rgb(var(--rgb-black) / 0.6);
+  --surface-player: rgb(var(--rgb-black));   /* behind the video while it loads or letterboxes */
+  --surface-tooltip: var(--color-gray-0);
+  --divider-on-media: rgb(var(--rgb-white) / 0.2);
+
+  /* Color — text */
+  --text-primary: var(--color-gray-100);
+  --text-secondary: var(--color-gray-300);
+  --text-tertiary: var(--color-gray-500);
+  --text-on-accent: var(--color-gray-0);
+  --text-on-tooltip: var(--color-gray-1050);
+
+  /* Color — accents */
+  --accent-brand: var(--color-flame-500);
+  --accent-brand-strong: var(--color-flame-600);
+  --accent-quality: var(--color-red-500);
+  --accent-info: var(--color-blue-500);
+
+  /* Feature marks on cards (as on deovr.com) */
+  --feature-premium: var(--color-flame-400);
+  --feature-top-picks: var(--color-orange-500);
+  --feature-icon-size: 1rem;
+
+  /* Focus */
+  --focus-ring-color: var(--color-gray-0);
+  --focus-ring-width: var(--border-width-200);
+  --focus-ring-offset: 0.1875rem;
+
+  /* Typography */
+  --font-family-ui: var(--font-family-sans);
+  --font-size-caption: var(--font-size-100);
+  --font-size-meta: var(--font-size-200);
+  --font-size-body: var(--font-size-300);
+  --font-weight-body: var(--font-weight-medium);
+  --font-weight-title: var(--font-weight-semibold);
+  --font-weight-strong: var(--font-weight-bold);
+  --line-height-label: var(--line-height-tight);
+  --line-height-body: var(--line-height-normal);
+  --letter-spacing-label: 0.02em;  /* short labels: badges, avatar initials */
+
+  /* Spacing scale: components use these steps, never the --space-* primitives */
+  --spacing-3xs: var(--space-050);
+  --spacing-2xs: var(--space-100);
+  --spacing-xs: var(--space-150);
+  --spacing-sm: var(--space-200);
+  --spacing-md: var(--space-300);
+  --spacing-lg: var(--space-400);
+  --spacing-xl: var(--space-500);
+  --spacing-2xl: var(--space-600);
+  --spacing-3xl: var(--space-800);
+  --spacing-4xl: var(--space-1200);
+
+  /* Interaction sizing (wiki/concepts/hit-targets-and-spacing.md) */
+  --target-min: var(--size-500);
+  --target-gap: var(--space-200);
+  --icon-size: 1.375rem;
+  --icon-size-small: 0.875rem;
+  --icon-stroke: 1.75;
+  --press-scale: 0.94;             /* controls shrink slightly while pressed */
+
+  /* Segmented tabs (feed switcher) */
+  --segment-height: 2.5rem;
+  --segment-border: rgb(var(--rgb-white) / 0.22);
+  --segment-border-hover: rgb(var(--rgb-white) / 0.4);
+  --segment-selected-bg: var(--color-gray-100);
+  --segment-selected-text: var(--color-gray-1050);
+
+  /* Pagination (compact, quiet) */
+  --pagination-dot: 0.375rem;
+  --pagination-dot-active: 1.125rem;
+  --pagination-gap: 0.3125rem;
+  --pagination-hit: 1.5rem;
+  --pagination-padding-x: var(--space-200);
+  --pagination-padding-y: var(--space-150);
+  --pagination-surface: rgb(var(--rgb-black) / 0.35);
+  --pagination-mark: rgb(var(--rgb-white) / 0.4);
+  --pagination-mark-hover: rgb(var(--rgb-white) / 0.6);
+  --pagination-mark-active: rgb(var(--rgb-white) / 0.9);
+
+  /* Brand & identity */
+  --logo-height: 2.25rem;          /* the mark's height */
+  --logo-wordmark-ratio: 0.443;    /* wordmark height / mark height in the logo artwork */
+  --logo-gap-ratio: 0.182;         /* gap between mark and wordmark / mark height */
+  --avatar-size: 1.375rem;
+  --avatar-saturation: 55%;
+  --avatar-lightness: 48%;
+  --avatar-gradient-hue-shift: 40; /* the gradient's second stop: hue + shift, … */
+  --avatar-gradient-darken: 12%;   /* … and lightness − darken */
+  --avatar-initials-ratio: 0.45;   /* initials size / avatar size */
+
+  /* Navigation pill */
+  --nav-offset-top: clamp(0.75rem, 3vh, 2rem);
+  --nav-divider-height: calc(var(--target-min) / 2);
+
+  /* Shape */
+  --radius-card: var(--radius-400);
+  --radius-panel: var(--radius-600);
+  --radius-control: var(--radius-full);
+  --radius-pill: var(--radius-full);
+  --radius-circle: var(--radius-full);
+  --radius-popover: var(--radius-500);
+
+  /* Borders */
+  --border-width-hairline: var(--border-width-100);
+  --border-width-control: var(--border-width-150);
+  --card-ring-width: var(--border-width-200); /* hover / focus ring drawn on posters */
+
+  /* Layers (z-index), bottom to top */
+  --layer-raised: 1;               /* above siblings inside a component (tooltips) */
+  --layer-dome: 10;
+  --layer-vignette: 15;
+  --layer-dome-ui: 16;             /* card overlays and the joystick, above the vignette */
+  --layer-nav: 20;
+  --layer-player: 40;
+  --layer-toast: 50;
+  --layer-skip-link: 100;
+
+  /* Elevation */
+  --shadow-floating: 0 0.75rem 2rem rgb(var(--rgb-black) / 0.35);
+  --shadow-card: 0 0.5rem 1.5rem rgb(var(--rgb-black) / 0.35);
+
+  /* Motion */
+  --motion-fast: var(--duration-100);
+  --motion-base: var(--duration-200);
+  --motion-info: var(--duration-300);
+  --motion-slow: var(--duration-500);
+  --motion-page: var(--duration-700);
+  --motion-mode-switch: var(--duration-900); /* desktop ↔ VR comfort mode: tokens, dome and rings glide together */
+  --motion-ease-mode: var(--ease-in-out-soft); /* no overshoot, gentle start and end */
+  --motion-player: var(--duration-700);        /* video opens out of its poster / closes back into it */
+  --motion-ease-player: var(--ease-in-out-soft);
+  --motion-ease: var(--ease-out);
+  --motion-ease-page: var(--ease-in-out);
+  --tooltip-delay: 280ms;
+  --preview-dwell: 600ms;
+  --toast-duration: 2800ms;
+  --toast-max-width: min(90vw, 28rem);
+  --dissolve-blur: 0.625rem;       /* feed switch: overlay blur when fully dissolved */
+  --player-close-offset: var(--space-800); /* close button above the bottom edge */
+
+  /* Scene: room backdrop, shade and screen vignette (wiki/concepts/dark-theme-in-vr.md) */
+  --scene-backdrop-opacity: 0;     /* room image: hidden on desktop, shown in VR comfort mode */
+  --scene-backdrop-blur: 0.375rem;
+  --scene-backdrop-overscan: 1.08;
+  --scene-shade-color: var(--rgb-black);
+  --scene-shade-opacity: 0.45;
+  --scene-vignette-clear: 34%;     /* radius share that stays untouched */
+  --scene-vignette-mid-stop: 72%;
+  --scene-vignette-mid: 0.55;
+  --scene-vignette-edge: 0.96;     /* almost black at the screen edge */
+  --scene-parallax-backdrop: 1.375rem;
+  --scene-parallax-ui: 0.375rem;
+
+  /* Dome gallery: physical model (read by DomeGallery.js; see components/dome-gallery/geometry.js) */
+  --dome-radius-m: 3;              /* cards 3 m from the head on desktop: a flatter, wider wall (VR: 1.5 m) */
+  --dome-card-width-m: 0.64;       /* poster width (with the 0.03 m gap: 28 columns around at 3 m) */
+  --dome-card-gap-m: 0.03;         /* horizontal gap between posters (tight → bigger cards) */
+  --dome-row-gap-m: 0.02;          /* vertical gap between rows of open cards (kept tight → bigger cards) */
+  --dome-grid-offset: 0;           /* 0 = rows line up (a card above/below the center); 1 = hex grid */
+  --dome-cluster-rows: 4;          /* rows of the open cluster */
+  --dome-cluster-rows-above: 1;    /* of them, above the gaze row → 5×4 with the gaze on the second row */
+  --dome-cluster-columns: 5;       /* cards in the inner rows */
+  --dome-cluster-edge: 5;          /* cards in the first and last rows (3 cuts the corners); at home the top
+                                      row is the 3-cell banner with a card on each side */
+  --dome-banner-span: 3;           /* cells per banner: 3 centers it on the aligned grid (2 on the hex grid) */
+  /* Banner spacing in lattice cells, the same in every mode (a mode switch never turns a card into a
+     banner): half a turn on desktop at 3 m (28 columns); in VR (12 columns at 1.5 m) a bit more than a
+     full turn, so at most one banner per row is in view there. */
+  --dome-banner-columns: 14;
+  --dome-banner-rows: 20;          /* even */
+  --dome-cluster-width-share: 0.94; /* the open cluster may use this share of the viewport width */
+  --dome-card-ui-warp: 1;          /* 1 = card UI is painted onto the sphere with the image; 0 = flat planes */
+  --dome-fov: 74;                  /* deg; horizontal view mapped to the viewport: a narrower view zooms in
+                                      (bigger cards, same curvature) — desktop 74, VR 100 */
+  --dome-projection-strength: 0.5; /* 1 = flat camera, 0.5 = stereographic, → 0 = fisheye */
+  --dome-info-height: 1.875rem;    /* byline row under an open card (engagement counts sit on the poster) */
+  --poster-meta-reserve: 4.5rem;   /* poster width kept free for the duration pill next to the engagement pill */
+  --byline-avatar-size: 1.125rem;
+  --dome-reference-card-width: 17.5rem; /* below this poster width, overlays shrink uniformly */
+  --dome-safe-gap: var(--space-100);        /* between the cluster and the nav pill */
+  --dome-safe-bottom: var(--space-100);     /* between the cluster and the bottom edge */
+  --dome-cull-margin: 1;           /* cells kept loaded beyond the screen edges (cards are culled by the
+                                      actual screen; this lets images arrive before cards scroll in) */
+  --dome-joystick-speed: 3;        /* columns per second at full joystick deflection */
+
+  /* Joystick (bottom-right corner) */
+  --joystick-opacity: 0;           /* desktop browses with the trackpad, wheel, keys and drag; the joystick is
+                                      for headsets (VR comfort mode) */
+  --joystick-visibility: hidden;   /* not clickable or focusable while invisible */
+  --joystick-inset-x: 4.5rem;     /* a little in from the corner, toward the center */
+  --joystick-inset-y: 2.5rem;
+  --joystick-size: 6.75rem;
+  --joystick-knob: 2.625rem;
+  --joystick-tick: 0.3125rem;
+  --joystick-tick-minor: 0.1875rem;
+  --joystick-tick-inset: 0.625rem; /* tick center distance from the rim */
+
+  /* Card emphasis by distance from the focus cluster */
+  --card-veil-ring-0: 0;
+  --card-veil-ring-1: 0.55;
+  --card-veil-ring-2: 0.78;
+  --card-hover-scale: 1.04;
+  --play-rest-scale: 0.8;          /* the play button grows from this share of its size on hover / focus */
+  --motion-info-delay: 160ms;
+  --motion-feed-stagger: 300ms;    /* feed switch: ripple from the gaze outward */
+}
+
+/* Headset comfort mode: bigger targets, capped brightness, calmer visuals. */
+:root[data-mode='vr'] {
+  --bg-canvas: var(--color-gray-900);
+  --text-primary: var(--color-gray-150);
+  --accent-info: var(--color-blue-400);
+
+  --font-size-caption: var(--font-size-200);
+  --font-size-meta: var(--font-size-300);
+  --font-size-body: var(--font-size-400);
+
+  --target-min: var(--size-600);
+  --target-gap: var(--space-400);
+  --icon-size: 1.625rem;
+  --icon-size-small: 1rem;
+  --icon-stroke: 2; /* thin strokes shimmer in headsets */
+  --pagination-hit: 2.25rem;
+  --pagination-dot: 0.5rem;
+  --pagination-dot-active: 1.5rem;
+  --pagination-gap: 0.4375rem;
+  --segment-height: var(--size-600);
+  --joystick-opacity: 1;
+  --joystick-visibility: visible;
+  --joystick-size: 9rem;
+  --joystick-knob: 3.375rem;
+  --logo-height: 2.5rem;
+  --avatar-size: 1.75rem;
+
+  --surface-glass: var(--color-gray-850);
+
+  --scene-backdrop-opacity: 1;
+  --scene-shade-opacity: 0.35;     /* the room shows through a little more in the headset */
+  --scene-parallax-backdrop: 0.625rem;
+  --scene-parallax-ui: 0rem;
+
+  --dome-radius-m: 1.5;            /* cards 1.5 m from the head in the headset */
+  --dome-fov: 100;
+  --dome-card-width-m: 0.75;       /* with the gap ≈ 12 columns around at 1.5 m */
+  --dome-cluster-rows: 3;          /* 3×3 in the headset: fewer, larger targets near the gaze */
+  --dome-cluster-rows-above: 1;
+  --dome-cluster-columns: 3;
+  --dome-cluster-edge: 3;
+  --dome-info-height: 2.25rem;
+  /* Headset panels are small in CSS px (≈1280×670): keep the UI larger there. */
+  --root-font-size: clamp(14px, min(1.25vw, 2vh), 26px);
+  --poster-meta-reserve: 5.5rem;
+  --byline-avatar-size: 1.375rem;
+  --feature-icon-size: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Also beats the VR override (higher specificity), which sets its own parallax depths. */
+  :root,
+  :root[data-mode='vr'] {
+    --motion-info: 1ms;
+    --motion-page: 1ms;
+    --motion-slow: 1ms;
+    --motion-mode-switch: 1ms;
+    --motion-player: 1ms;
+    --scene-parallax-backdrop: 0rem;
+    --scene-parallax-ui: 0rem;
+    --card-hover-scale: 1;
+    --motion-info-delay: 0ms;
+    --motion-feed-stagger: 0ms;
+  }
+}

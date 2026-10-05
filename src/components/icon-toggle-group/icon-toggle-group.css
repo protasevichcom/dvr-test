@@ -1,0 +1,8 @@
+/* Pill holding mutually exclusive icon options; the pressed one is a filled chip (icon-button.css). */
+.icon-toggle-group {
+  display: inline-flex;
+  gap: var(--spacing-3xs);
+  padding: var(--spacing-3xs);
+  border-radius: var(--radius-pill);
+  background: var(--surface-control);
+}

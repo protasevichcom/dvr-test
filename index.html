@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-mode="desktop">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#141414" />
+    <title>DeoVR — Homepage Concept</title>
+    <meta
+      name="description"
+      content="Concept prototype of an immersive, dark-theme DeoVR homepage for desktop and VR headset browsers."
+    />
+    <link rel="icon" type="image/png" href="/assets/brand/deovr-mark.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
+    />
+    <link rel="preload" as="image" href="/assets/images/room.webp" />
+
+    <!-- Tokens first, then base, then components (one stylesheet per component). -->
+    <link rel="stylesheet" href="/src/tokens/primitives.css" />
+    <link rel="stylesheet" href="/src/tokens/semantic.css" />
+    <link rel="stylesheet" href="/src/tokens/mode-transition.css" />
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/components/icon/icon.css" />
+    <link rel="stylesheet" href="/src/components/tooltip/tooltip.css" />
+    <link rel="stylesheet" href="/src/components/icon-button/icon-button.css" />
+    <link rel="stylesheet" href="/src/components/avatar/avatar.css" />
+    <link rel="stylesheet" href="/src/components/badge/badge.css" />
+    <link rel="stylesheet" href="/src/components/badge/feature-pill.css" />
+    <link rel="stylesheet" href="/src/components/logo/logo.css" />
+    <link rel="stylesheet" href="/src/components/toast/toast.css" />
+    <link rel="stylesheet" href="/src/components/room-backdrop/room-backdrop.css" />
+    <link rel="stylesheet" href="/src/components/scene-shade/scene-shade.css" />
+    <link rel="stylesheet" href="/src/components/nav-pill/nav-pill.css" />
+    <link rel="stylesheet" href="/src/components/icon-toggle-group/icon-toggle-group.css" />
+    <link rel="stylesheet" href="/src/components/segmented-tabs/segmented-tabs.css" />
+    <link rel="stylesheet" href="/src/components/pagination/pagination.css" />
+    <link rel="stylesheet" href="/src/components/joystick/joystick.css" />
+    <link rel="stylesheet" href="/src/components/poster-overlay/poster-overlay.css" />
+    <link rel="stylesheet" href="/src/components/poster-hit/poster-hit.css" />
+    <link rel="stylesheet" href="/src/components/poster-strip/poster-strip.css" />
+    <link rel="stylesheet" href="/src/components/video-card/video-card-overlay.css" />
+    <link rel="stylesheet" href="/src/components/featured-banner/featured-banner.css" />
+    <link rel="stylesheet" href="/src/components/dome-gallery/dome-gallery.css" />
+    <link rel="stylesheet" href="/src/components/video-player/video-player.css" />
+    <link rel="stylesheet" href="/src/components/screen-vignette/screen-vignette.css" />
+
+    <!-- three.js renders the curved dome (wiki/decisions/0006-webgl-dome.md). Pinned version. -->
+    <script type="importmap">
+      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }
+    </script>
+    <!-- Fetch three.js in parallel instead of after walking the import chain down to DomeScene.js. -->
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#gallery">Skip to videos</a>
+    <main id="app"></main>
+  </body>
+</html>

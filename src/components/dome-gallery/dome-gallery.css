@@ -1,0 +1,70 @@
+/*
+ * Dome gallery. The WebGL canvas sits under the screen vignette (z 15); card overlays and the joystick
+ * sit above it. The section itself creates no stacking context so its
+ * children can interleave with the vignette.
+ */
+.dome-gallery:focus {
+  outline: none; /* focus moves on to the centered card */
+}
+
+.dome-gallery__canvas {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-dome);
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.dome-gallery[data-dragging='true'] .dome-gallery__canvas {
+  cursor: grabbing;
+}
+
+/* Flat DOM overlays of open cards (text, badges, accessible buttons); see VideoCardOverlay. */
+.dome-gallery__overlays {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-dome-ui);
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity var(--motion-player) var(--motion-ease-player);
+}
+
+/* Bottom-right, over the dimmed periphery; the dome does not reserve room for it. */
+.dome-gallery__joystick {
+  position: fixed;
+  right: var(--joystick-inset-x);
+  bottom: var(--joystick-inset-y);
+  z-index: var(--layer-dome-ui);
+  transition:
+    transform var(--motion-player) var(--motion-ease-player),
+    opacity var(--motion-player) var(--motion-ease-player);
+}
+
+/* While a video plays (`data-player` on the root, set by main.js): card labels and icons fade out,
+   the joystick slides down and out. */
+:root[data-player] .dome-gallery__overlays {
+  opacity: 0;
+}
+
+:root[data-player] .dome-gallery__joystick {
+  opacity: 0;
+  transform: translateY(calc(100% + var(--joystick-inset-y)));
+  pointer-events: none;
+}
+
+/* Shown in VR comfort mode only (`--joystick-opacity`, glides on a mode switch). Visibility follows so
+   the hidden joystick takes no clicks or focus; its transition keeps it visible while it fades out. */
+.dome-gallery__joystick .joystick {
+  opacity: var(--joystick-opacity);
+  visibility: var(--joystick-visibility);
+  transition: visibility var(--motion-mode-switch);
+}
+
+/* Keep the tooltip on screen: right-aligned above the joystick. */
+.dome-gallery__joystick .tooltip {
+  left: auto;
+  right: 0;
+  translate: 0 0;
+}

@@ -1,0 +1,129 @@
+/*
+ * Primitive tokens: raw brand values.
+ * Components must NOT reference these directly; use semantic tokens (semantic.css).
+ * Sources: raw/brand/deovr-css-tokens-2026-10-05.txt, wiki/decisions/0002-dark-theme-brand-tokens.md
+ */
+:root {
+  /* Neutral slate scale (brand) */
+  --color-neutral-0: #ffffff;
+  --color-neutral-100: #eef1f5;
+  --color-neutral-150: #dadde2;
+  --color-neutral-300: #d1d7df;
+  --color-neutral-500: #a2a9b4;
+  --color-neutral-600: #8a9bb4;
+  --color-neutral-700: #566b8a;
+  --color-neutral-800: #262f3b;
+  --color-neutral-900: #1d242e;
+  --color-neutral-920: #1a1e25;
+  --color-neutral-950: #101419;
+  --color-neutral-1000: #080a0c;
+
+  /* Neutral RGB channels for translucent layers */
+  --rgb-neutral-1000: 8 10 12;
+  --rgb-neutral-900: 29 36 46;
+  --rgb-neutral-100: 238 241 245;
+
+  /* Neutral graphite (DeoVR player UI reference, 2026-10-05) */
+  --color-gray-0: #ffffff;
+  --color-gray-100: #f2f2f2;
+  --color-gray-150: #dadada;
+  --color-gray-300: #bdbdbd;
+  --color-gray-500: #8a8a8a;
+  --color-gray-600: #5c5c5c;
+  --color-gray-700: #4a4a4a;
+  --color-gray-750: #3a3a3a;
+  --color-gray-800: #333333;
+  --color-gray-850: #2a2a2a;
+  --color-gray-900: #232323;
+  --color-gray-950: #1f1f1f;
+  --color-gray-1000: #141414;
+  --color-gray-1050: #111111;
+  --rgb-gray-1000: 20 20 20;
+  --rgb-gray-850: 42 42 42;
+  --rgb-black: 0 0 0;
+  --rgb-white: 255 255 255;
+
+  /* Accent orange-red (player progress, "Get Premium") */
+  --color-flame-400: #ff6a3a;
+  --color-flame-500: #ff4f17;
+  --color-flame-600: #e2461a;
+
+  /* Quality badge red */
+  --color-red-500: #e0263c;
+
+  /* Brand pink */
+  --color-pink-400: #ff5e99;
+  --color-pink-500: #fd4488;
+  --color-pink-600: #d92d6a;
+
+  /* Brand blue */
+  --color-blue-300: #a8cfff;
+  --color-blue-400: #7ab0ff;
+  --color-blue-500: #4f95ff;
+
+  /* Logo-mark gradient stops */
+  --color-mark-coral: #ff7a6b;
+  --color-mark-violet: #a86bff;
+
+  /* Feature marks (deovr.com: Top Picks flame) */
+  --color-orange-500: #ff7b00;
+
+  /* Status */
+  --color-green-600: #4cb98a;
+
+  /* Type */
+  --font-family-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-size-100: 0.75rem;   /* 12 */
+  --font-size-200: 0.8125rem; /* 13 */
+  --font-size-300: 0.875rem;  /* 14 */
+  --font-size-400: 1rem;      /* 16 */
+  --font-size-500: 1.125rem;  /* 18 */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.45;
+
+  /* Space (4 px grid) */
+  --space-050: 0.125rem;
+  --space-100: 0.25rem;
+  --space-150: 0.375rem;
+  --space-200: 0.5rem;
+  --space-300: 0.75rem;
+  --space-400: 1rem;
+  --space-500: 1.25rem;
+  --space-600: 1.5rem;
+  --space-800: 2rem;
+  --space-1200: 3rem;
+
+  /* Size */
+  --size-400: 2.75rem; /* 44 */
+  --size-500: 3rem;    /* 48 */
+  --size-600: 3.75rem; /* 60 */
+  --size-700: 4rem;    /* 64 */
+
+  /* Radius */
+  --radius-200: 0.5rem;
+  --radius-300: 0.75rem;
+  --radius-400: 1rem;
+  --radius-500: 1.5rem;
+  --radius-600: 2.25rem;
+  --radius-full: 999rem;
+
+  /* Border */
+  --border-width-100: 0.0625rem;
+  --border-width-150: 0.09375rem;
+  --border-width-200: 0.125rem;
+
+  /* Motion */
+  --duration-100: 120ms;
+  --duration-200: 200ms;
+  --duration-300: 320ms;
+  --duration-500: 520ms;
+  --duration-700: 700ms;
+  --duration-900: 900ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.55, 1);
+}

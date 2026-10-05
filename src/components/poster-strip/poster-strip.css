@@ -1,0 +1,40 @@
+/* Clipped at the poster's bottom edge, so the content slides out from under the image. */
+.poster-strip {
+  height: calc(var(--dome-info-height) * var(--dome-overlay-scale));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.poster-strip__content {
+  display: flex;
+  align-items: center;
+  width: calc(100% / var(--dome-overlay-scale));
+  min-height: calc(var(--byline-avatar-size) + var(--spacing-sm));
+  padding-top: var(--spacing-sm);
+  opacity: var(--openness);
+  transform-origin: 0 0;
+  transform: scale(var(--dome-overlay-scale)) translateY(calc((var(--openness) - 1) * 100%));
+}
+
+/* Starts where the pills on the poster start. */
+.poster-strip--start .poster-strip__content {
+  padding-left: var(--spacing-sm);
+}
+
+.poster-strip--center .poster-strip__content {
+  justify-content: center;
+}
+
+/* Warp mode: the strip keeps its own size; the projective transform scales it onto the sphere. */
+.poster-strip[data-warp='true'] {
+  height: var(--dome-info-height);
+}
+
+.poster-strip--center[data-warp='true'] {
+  width: max-content;
+}
+
+.poster-strip[data-warp='true'] .poster-strip__content {
+  width: 100%;
+  transform: translateY(calc((var(--openness) - 1) * 100%));
+}

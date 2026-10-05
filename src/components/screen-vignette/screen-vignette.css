@@ -1,0 +1,13 @@
+.screen-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-vignette);
+  pointer-events: none;
+  /* `circle farthest-side` keeps the falloff round on any aspect ratio; corners end fully dark. */
+  background: radial-gradient(
+    circle farthest-side at 50% 50%,
+    rgb(var(--scene-shade-color) / 0) var(--scene-vignette-clear),
+    rgb(var(--scene-shade-color) / var(--scene-vignette-mid)) var(--scene-vignette-mid-stop),
+    rgb(var(--scene-shade-color) / var(--scene-vignette-edge)) 100%
+  );
+}

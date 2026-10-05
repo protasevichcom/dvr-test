@@ -1,0 +1,55 @@
+/*
+ * Compact, quiet dot pagination. Marks sit at an equal gap; the current one is a short dash.
+ * On change, one dot widens into the dash while the dash shrinks into a dot with the same timing,
+ * so the total length never changes.
+ */
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pagination-gap);
+  padding: var(--pagination-padding-y) var(--pagination-padding-x);
+  border-radius: var(--radius-pill);
+  background: var(--pagination-surface);
+}
+
+/* Bare: marks only, e.g. under a banner next to plain-text bylines. */
+.pagination--bare {
+  padding: 0;
+  background: none;
+}
+
+.pagination__dot {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Invisible hit area beyond the tiny mark; it splits the gap, so neighbours never overlap. */
+.pagination__dot::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--pagination-hit) - var(--pagination-dot)) / -2) calc(var(--pagination-gap) / -2);
+}
+
+.pagination__mark {
+  display: block;
+  width: var(--pagination-dot);
+  height: var(--pagination-dot);
+  border-radius: var(--radius-circle);
+  background: var(--pagination-mark);
+  transition:
+    width var(--motion-slow) var(--motion-ease-page),
+    background-color var(--motion-slow) var(--motion-ease-page);
+}
+
+.pagination__dot:hover .pagination__mark {
+  background: var(--pagination-mark-hover);
+}
+
+.pagination__dot[aria-current='true'] .pagination__mark {
+  width: var(--pagination-dot-active);
+  background: var(--pagination-mark-active);
+}

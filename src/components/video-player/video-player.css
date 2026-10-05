@@ -1,0 +1,66 @@
+/*
+ * Full-viewport video player. The frame is warped by VideoPlayer.morph() while it opens and closes;
+ * once open it simply fills the viewport. The close button (and the sound button, when playback had
+ * to start muted) slides in from the bottom center.
+ */
+.video-player {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-player);
+}
+
+.video-player__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: var(--surface-player);
+  transform-origin: 0 0;
+}
+
+.video-player[data-state='open'] .video-player__frame {
+  width: 100%;
+  height: 100%;
+}
+
+.video-player__video,
+.video-player__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The poster image stands in for the video until it plays. */
+.video-player__cover {
+  transition: opacity var(--motion-slow) var(--motion-ease);
+}
+
+.video-player[data-playing='true'] .video-player__cover {
+  opacity: 0;
+}
+
+.video-player__close {
+  display: flex;
+  gap: var(--target-gap);
+  position: absolute;
+  bottom: var(--player-close-offset);
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, calc(100% + var(--player-close-offset)));
+  transition:
+    transform var(--motion-player) var(--motion-ease-player),
+    opacity var(--motion-player) var(--motion-ease-player);
+}
+
+/* Icon buttons set their own display, which would override `hidden`. */
+.video-player__close [hidden] {
+  display: none;
+}
+
+.video-player[data-state='opening'] .video-player__close,
+.video-player[data-state='open'] .video-player__close {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

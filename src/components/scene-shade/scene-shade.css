@@ -1,0 +1,6 @@
+.scene-shade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgb(var(--scene-shade-color) / var(--scene-shade-opacity));
+}

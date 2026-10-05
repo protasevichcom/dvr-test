@@ -1,0 +1,73 @@
+.icon-button {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-base) var(--motion-ease),
+    color var(--motion-base) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
+}
+
+.icon-button--glass {
+  background: var(--surface-control);
+  color: var(--text-primary);
+}
+
+.icon-button:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.icon-button--glass:hover {
+  /* Solid inverse on hover (player reference): white button, black glyph. */
+  background: var(--surface-tooltip);
+  color: var(--text-on-tooltip);
+}
+
+.icon-button--accent {
+  background: var(--accent-brand-strong);
+  color: var(--text-on-accent);
+}
+
+.icon-button--accent:hover {
+  background: var(--accent-brand);
+  color: var(--text-on-accent);
+}
+
+.icon-button:active {
+  background: var(--surface-pressed);
+  transform: scale(var(--press-scale));
+}
+
+.icon-button[aria-current='page'],
+.icon-button[aria-pressed='true'] {
+  color: var(--text-primary);
+  background: var(--surface-selected);
+}
+
+/* Brand-colored indicator under the current item. */
+.icon-button[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  bottom: var(--spacing-2xs);
+  width: var(--spacing-xs);
+  height: var(--spacing-xs);
+  border-radius: var(--radius-circle);
+  background: var(--accent-brand);
+}
+
+/* Tooltip (components/tooltip) reveals on hover and keyboard focus. */
+.icon-button:hover .tooltip,
+.icon-button:focus-visible .tooltip {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--tooltip-delay);
+}

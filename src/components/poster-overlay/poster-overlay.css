@@ -1,0 +1,14 @@
+/* Children are anchored at the layer's origin; JS places them (translate + rotate, or matrix3d). */
+.poster-overlay > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+/* Feed switch (setDissolve): the layer fades and blurs together with its poster. */
+.poster-overlay[data-dissolving='true'] {
+  opacity: calc(1 - var(--dissolve));
+  filter: blur(calc(var(--dissolve) * var(--dissolve-blur)));
+  pointer-events: none;
+}

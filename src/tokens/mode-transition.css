@@ -1,0 +1,68 @@
+/*
+ * Display-mode switch (desktop ↔ VR comfort mode) without swapping anything: the tokens that the
+ * VR override changes are registered with a type, so the browser can interpolate them, and while
+ * `data-mode-switching` is set (applyDisplayMode with `animate`) they glide to their new values.
+ * Every element that uses them — nav pill, feed tabs, joystick, card text — resizes in place; rem
+ * sizes follow the gliding root size. The dome follows the same tokens frame by frame (DomeGallery).
+ *
+ * Keep this list in sync with :root[data-mode='vr'] in semantic.css: an override that is not
+ * registered here switches instantly.
+ */
+
+/* Root size: every rem in the UI follows it. */
+@property --root-font-size { syntax: '<length>'; inherits: true; initial-value: 16px; }
+
+/* Colors */
+@property --bg-canvas { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --text-primary { syntax: '<color>'; inherits: true; initial-value: white; }
+@property --accent-info { syntax: '<color>'; inherits: true; initial-value: white; }
+@property --surface-glass { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+/* Type, icons and targets */
+@property --font-size-caption { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --font-size-meta { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --font-size-body { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --target-min { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --target-gap { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --icon-size { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --icon-size-small { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --icon-stroke { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --logo-height { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --avatar-size { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --segment-height { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+/* Pagination and joystick */
+@property --pagination-hit { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --pagination-dot { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --pagination-dot-active { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --pagination-gap { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --joystick-opacity { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --joystick-size { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --joystick-knob { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+/* Scene */
+@property --scene-backdrop-opacity { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --scene-shade-opacity { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --scene-parallax-backdrop { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --scene-parallax-ui { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+/* Dome and card overlays */
+@property --dome-fov { syntax: '<number>'; inherits: true; initial-value: 100; }
+@property --dome-radius-m { syntax: '<number>'; inherits: true; initial-value: 1.5; }
+@property --dome-card-width-m { syntax: '<number>'; inherits: true; initial-value: 0.64; }
+@property --dome-info-height { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --poster-meta-reserve { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --byline-avatar-size { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --feature-icon-size { syntax: '<length>'; inherits: true; initial-value: 0px; }
+
+:root[data-mode-switching] {
+  transition-property:
+    --root-font-size, --bg-canvas, --text-primary, --accent-info, --surface-glass, --font-size-caption,
+    --font-size-meta, --font-size-body, --target-min, --target-gap, --icon-size, --icon-size-small, --icon-stroke,
+    --logo-height, --avatar-size, --segment-height, --pagination-hit, --pagination-dot, --pagination-dot-active,
+    --pagination-gap, --joystick-opacity, --joystick-size, --joystick-knob, --scene-backdrop-opacity, --scene-shade-opacity, --scene-parallax-backdrop,
+    --scene-parallax-ui, --dome-fov, --dome-radius-m, --dome-card-width-m, --dome-info-height, --poster-meta-reserve, --byline-avatar-size,
+    --feature-icon-size;
+  transition-duration: var(--motion-mode-switch);
+  transition-timing-function: var(--motion-ease-mode);
+}

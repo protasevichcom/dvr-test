@@ -1,0 +1,20 @@
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: var(--radius-circle);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--avatar-hue) var(--avatar-saturation) var(--avatar-lightness)),
+    hsl(
+      calc(var(--avatar-hue) + var(--avatar-gradient-hue-shift)) var(--avatar-saturation)
+        calc(var(--avatar-lightness) - var(--avatar-gradient-darken))
+    )
+  );
+  color: var(--text-on-accent);
+  font-size: calc(var(--avatar-size) * var(--avatar-initials-ratio));
+  font-weight: var(--font-weight-strong);
+  letter-spacing: var(--letter-spacing-label);
+}

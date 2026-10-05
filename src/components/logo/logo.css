@@ -1,0 +1,21 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-height) * var(--logo-gap-ratio));
+  height: var(--target-min);
+  padding-inline: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-control);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.logo__mark {
+  width: auto;
+  height: var(--logo-height);
+}
+
+.logo__wordmark {
+  width: auto;
+  height: calc(var(--logo-height) * var(--logo-wordmark-ratio));
+  fill: currentColor;
+}

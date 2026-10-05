@@ -1,0 +1,71 @@
+.joystick {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+}
+
+.joystick__base {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--joystick-size);
+  height: var(--joystick-size);
+  border-radius: var(--radius-circle);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-floating);
+  cursor: grab;
+  touch-action: none;
+}
+
+.joystick[data-active='true'] .joystick__base {
+  cursor: grabbing;
+}
+
+.joystick__ticks {
+  position: absolute;
+  inset: 0;
+}
+
+/* Small marks on the rim pointing to the six neighbour directions of the lattice. */
+.joystick__tick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--joystick-tick);
+  height: var(--joystick-tick);
+  border-radius: var(--radius-circle);
+  background: var(--text-tertiary);
+  transform: rotate(var(--tick-angle)) translateX(calc(var(--joystick-size) / 2 - var(--joystick-tick-inset)))
+    translate(-50%, -50%);
+  transform-origin: 0 0;
+}
+
+.joystick__tick--minor {
+  width: var(--joystick-tick-minor);
+  height: var(--joystick-tick-minor);
+}
+
+.joystick__knob {
+  width: var(--joystick-knob);
+  height: var(--joystick-knob);
+  border-radius: var(--radius-circle);
+  background: var(--text-primary);
+  box-shadow: var(--shadow-card);
+  transition: translate var(--motion-base) var(--motion-ease);
+  pointer-events: none;
+}
+
+.joystick[data-active='true'] .joystick__knob {
+  background: var(--accent-brand);
+  transition: none;
+}
+
+.joystick:hover .tooltip {
+  opacity: 1;
+  transform: none;
+  transition-delay: var(--tooltip-delay);
+}
+
+.joystick[data-active='true'] .tooltip {
+  opacity: 0;
+}

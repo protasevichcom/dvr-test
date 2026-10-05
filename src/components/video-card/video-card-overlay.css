@@ -1,0 +1,115 @@
+/*
+ * Overlay of an open card (a PosterOverlay). Flat mode: elements are positioned with `translate` +
+ * `rotate` from the projected poster geometry (VideoCardOverlay.place). Warp mode (`data-warp`): JS
+ * sets a projective `transform` on each element every frame (placeWarped). `--openness` (0…1) drives
+ * the open/close motion and `--dome-overlay-scale` (set by the gallery) shrinks everything uniformly
+ * on small posters. The byline sits in a PosterStrip; the hit area is a PosterHit.
+ */
+
+/* Warp mode: anchors get a projective transform from JS. */
+.video-card-overlay[data-warp='true'] .video-card-overlay__play {
+  /* The transform is rewritten every frame (its size follows the highlight tween in JS): a transform
+     transition would restart each frame and trail the poster. */
+  transition: opacity var(--motion-base) var(--motion-ease);
+}
+
+.video-card-overlay__features,
+.video-card-overlay__duration,
+.video-card-overlay__stats-anchor,
+.video-card-overlay__play {
+  pointer-events: none;
+  opacity: var(--openness);
+}
+
+/* Flex anchors hug their pill: no line box, so pills with text or icon baselines get equal heights. */
+.video-card-overlay__features,
+.video-card-overlay__duration,
+.video-card-overlay__stats-anchor {
+  display: flex;
+}
+
+/* Engagement counts on the poster's bottom-left, sharing the row with the duration on the right. */
+.video-card-overlay__stats-anchor {
+  transform: scale(var(--dome-overlay-scale)) translate(var(--spacing-sm), calc(-100% - var(--spacing-sm)));
+}
+
+.video-card-overlay__features {
+  transform: scale(var(--dome-overlay-scale)) translate(var(--spacing-sm), var(--spacing-sm));
+}
+
+.video-card-overlay__duration {
+  transform: scale(var(--dome-overlay-scale))
+    translate(calc(-100% - var(--spacing-sm)), calc(-100% - var(--spacing-sm)));
+}
+
+.video-card-overlay__play {
+  display: grid;
+  place-items: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  border-radius: var(--radius-circle);
+  background: var(--accent-brand-strong);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-floating);
+  opacity: 0;
+  transform: scale(calc(var(--dome-overlay-scale) * var(--play-rest-scale))) translate(-50%, -50%);
+  transition:
+    opacity var(--motion-base) var(--motion-ease),
+    transform var(--motion-base) var(--motion-ease);
+}
+
+.video-card-overlay[data-highlighted='true'] .video-card-overlay__play {
+  opacity: 1;
+  transform: scale(var(--dome-overlay-scale)) translate(-50%, -50%);
+}
+
+.video-card-overlay__byline {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-label);
+}
+
+.video-card-overlay__byline .avatar {
+  --avatar-size: var(--byline-avatar-size);
+}
+
+.video-card-overlay__channel {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-card-overlay__verified {
+  display: inline-flex;
+  flex: none;
+  color: var(--accent-info);
+}
+
+.video-card-overlay__age {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* A badge (duration typography) holding a list; leaves room for the duration pill on the same row. */
+.video-card-overlay__stats {
+  gap: var(--spacing-md);
+  max-width: calc(var(--poster-width) / var(--dome-overlay-scale) - var(--poster-meta-reserve));
+  margin: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.video-card-overlay__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
+}

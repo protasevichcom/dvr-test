@@ -1,0 +1,14 @@
+node_modules/
+.next/
+dist/
+.vercel/
+.env*
+!.env.example
+.DS_Store
+.obsidian/workspace*.json
+.vercel
+.claude/settings.local.json
+
+# Kept local only: verbatim task briefs and the extracted deovr.com CSS dump
+raw/brief/
+raw/brand/deovr-css-tokens-*.txt

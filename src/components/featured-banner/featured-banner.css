@@ -1,0 +1,28 @@
+/*
+ * Featured banner overlay (a PosterOverlay): hit area (PosterHit), arrows on the image, pagination in a
+ * centered PosterStrip under it. Positioned from the banner's projected edges (FeaturedBanner.place);
+ * `--openness` drives the open/close motion, `--dome-overlay-scale` shrinks it on small domes.
+ */
+
+/* Arrows on the image's side edges. */
+.featured-banner__control {
+  opacity: var(--openness);
+  pointer-events: none;
+}
+
+.featured-banner[data-open='true'] .featured-banner__control {
+  pointer-events: auto;
+}
+
+.featured-banner__control--prev {
+  transform: scale(var(--dome-overlay-scale)) translate(var(--spacing-md), -50%);
+}
+
+.featured-banner__control--next {
+  transform: scale(var(--dome-overlay-scale)) translate(calc(-100% - var(--spacing-md)), -50%);
+}
+
+/* The pagination in the strip under the image takes clicks while the banner is open. */
+.featured-banner[data-open='true'] .pagination {
+  pointer-events: auto;
+}

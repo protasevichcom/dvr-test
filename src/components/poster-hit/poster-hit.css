@@ -1,0 +1,13 @@
+.poster-hit {
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* The focus ring is drawn on the curved poster itself (WebGL highlight). */
+.poster-hit:focus-visible {
+  outline: none;
+}

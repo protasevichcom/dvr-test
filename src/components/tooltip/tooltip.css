@@ -1,0 +1,33 @@
+/*
+ * Tooltip bubble (Tooltip.js). Hidden by default; the owning component reveals it (opacity 1,
+ * transform none) on hover / focus, e.g. IconButton and Joystick.
+ */
+.tooltip {
+  position: absolute;
+  left: 50%;
+  z-index: var(--layer-raised);
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-radius: var(--radius-pill);
+  background: var(--surface-tooltip);
+  box-shadow: var(--shadow-floating);
+  color: var(--text-on-tooltip);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  translate: -50% 0;
+  transition:
+    opacity var(--motion-base) var(--motion-ease),
+    transform var(--motion-base) var(--motion-ease);
+}
+
+.tooltip--below {
+  top: calc(100% + var(--spacing-md));
+  transform: translateY(calc(-1 * var(--spacing-2xs)));
+}
+
+.tooltip--above {
+  bottom: calc(100% + var(--spacing-md));
+  transform: translateY(var(--spacing-2xs));
+}

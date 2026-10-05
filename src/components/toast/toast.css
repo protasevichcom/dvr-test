@@ -1,0 +1,40 @@
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--spacing-3xl);
+  z-index: var(--layer-toast);
+  display: grid;
+  gap: var(--spacing-3xs);
+  max-width: var(--toast-max-width);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-popover);
+  background: var(--surface-glass-strong);
+  box-shadow: var(--shadow-floating);
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, var(--spacing-md));
+  transition:
+    opacity var(--motion-base) var(--motion-ease),
+    transform var(--motion-base) var(--motion-ease);
+}
+
+.toast[data-visible='true'] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-title);
+}
+
+.toast__detail {
+  color: var(--text-secondary);
+  font-size: var(--font-size-meta);
+}
+
+/* Title-only messages (e.g. "VR mode on") keep a compact, centered pill. */
+.toast__detail:empty {
+  display: none;
+}

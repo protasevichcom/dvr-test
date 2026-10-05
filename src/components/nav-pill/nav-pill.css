@@ -1,0 +1,62 @@
+/*
+ * Anchor keeps the pill and the feed tabs centered above the gaze. Flat UI: no 3D tilt and no
+ * parallax shift (fractional 3D translation would also soften text and icons).
+ */
+.nav-pill-anchor {
+  position: fixed;
+  top: var(--nav-offset-top);
+  right: 0;
+  left: 0;
+  z-index: var(--layer-nav);
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-md);
+  pointer-events: none;
+}
+
+.nav-pill-anchor > * {
+  pointer-events: auto;
+}
+
+/* While a video plays (`data-player` on the root, set by main.js) the menu and tabs slide up and out. */
+.nav-pill-anchor {
+  transition:
+    transform var(--motion-player) var(--motion-ease-player),
+    opacity var(--motion-player) var(--motion-ease-player);
+}
+
+:root[data-player] .nav-pill-anchor {
+  opacity: 0;
+  transform: translateY(calc(-100% - var(--nav-offset-top)));
+}
+
+:root[data-player] .nav-pill-anchor > * {
+  pointer-events: none;
+}
+
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-floating);
+}
+
+.nav-pill__list,
+.nav-pill__utilities {
+  display: flex;
+  align-items: center;
+  gap: var(--target-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-pill__divider {
+  width: var(--border-width-hairline);
+  height: var(--nav-divider-height);
+  margin-inline: var(--spacing-sm);
+  background: var(--surface-chip);
+}
